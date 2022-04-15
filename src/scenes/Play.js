@@ -54,7 +54,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-        this.scoreRight = this.add.text(game.config.width - borderUISize - borderPadding, borderUISize + borderPadding*2, game.config.highscore, scoreConfig);
+        this.scoreRight = this.add.text(game.config.width - (borderUISize + borderPadding + scoreConfig.fixedWidth) , borderUISize + borderPadding*2, game.config.highscore, scoreConfig);
         // GAME OVER flag
         this.gameOver = false;
          
@@ -121,9 +121,9 @@ class Play extends Phaser.Scene {
         // score add and repaint
         this.p1Score += ship.points;
         //update highscore
-        if (p1Score > game.config.highscore) {
-            game.config.highscore = p1Score;
-            this.scoreRight = game.config.highscore;
+        if (this.p1Score > game.config.highscore) {
+            game.config.highscore = this.p1Score;
+            this.scoreRight.text = game.config.highscore;
         }
         this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion');      
