@@ -40,7 +40,7 @@ class Play extends Phaser.Scene {
             frameRate: 30 });
         // initialize score
         this.p1Score = 0;
-        // display score
+        // display score/highscore
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -54,6 +54,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        this.scoreRight = this.add.text(game.config.width - borderUISize - borderPadding, borderUISize + borderPadding*2, game.config.highscore, scoreConfig);
         // GAME OVER flag
         this.gameOver = false;
          
@@ -119,7 +120,12 @@ class Play extends Phaser.Scene {
         });
         // score add and repaint
         this.p1Score += ship.points;
-        this.scoreLeft.text = this.p1Score; 
+        //update highscore
+        if (p1Score > game.config.highscore) {
+            game.config.highscore = p1Score;
+            this.scoreRight = game.config.highscore;
+        }
+        this.scoreLeft.text = this.p1Score;
         this.sound.play('sfx_explosion');      
       }
 }
