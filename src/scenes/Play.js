@@ -102,7 +102,11 @@ class Play extends Phaser.Scene {
             this.shipExplode(this.ship01);
         }
         //update clock
-        this.timeText.text = (60 - this.clock.getElapsedSeconds()).toString().substr(0, 4);
+        if (this.gameOver) {
+            this.timeText.text = "0.00"
+        } else {
+            this.timeText.text = ((game.settings.gameTimer / 1000) - this.clock.getElapsedSeconds()).toString().substr(0, 4);
+        }
     }
 
     checkCollision(rocket, ship) {
