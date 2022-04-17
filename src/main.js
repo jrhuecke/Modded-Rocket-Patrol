@@ -4,6 +4,7 @@ let config = {
     height: 480,
     scene: [ Menu, Play, PlayTwo ],
     highscore: 0,
+    twoplayer_highscore: 0
 }
 let game = new Phaser.Game(config);
 
@@ -16,3 +17,4 @@ let borderPadding = borderUISize / 3;
 
 //start highscore at 0
 game.config.highscore = 0;
+game.config.twoplayer_highscore = 0;
