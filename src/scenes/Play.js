@@ -68,6 +68,10 @@ class Play extends Phaser.Scene {
         }, null, this);
         //countdown timer
         this.timeText = this.add.text((game.config.width / 2) - 35, borderUISize + borderPadding*2, this.clock.getProgress().toString().substr(0, 4), scoreConfig);
+        //background music
+        this.music = this.sound.add('sfx_music');
+        this.music.loop = true;
+        this.music.play();
     }
 
     update() {
@@ -76,9 +80,11 @@ class Play extends Phaser.Scene {
             this.scene.restart();
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.music.stop();
             this.scene.start("menuScene");
         }
         if (Phaser.Input.Keyboard.JustDown(keyM)) {
+            this.music.stop();
             this.scene.start("menuScene");
         }
         this.starfield.tilePositionX -= 4;
