@@ -30,6 +30,7 @@ class Play extends Phaser.Scene {
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -65,6 +66,8 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width/2, game.config.height/2 + 64, '(R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+        //countdown timer
+        this.timeText = this.add.text((game.config.width / 2) - 35, borderUISize + borderPadding*2, this.clock.getProgress().toString().substr(0, 4), scoreConfig);
     }
 
     update() {
@@ -73,6 +76,9 @@ class Play extends Phaser.Scene {
             this.scene.restart();
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            this.scene.start("menuScene");
+        }
+        if (Phaser.Input.Keyboard.JustDown(keyM)) {
             this.scene.start("menuScene");
         }
         this.starfield.tilePositionX -= 4;
@@ -95,6 +101,8 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             this.shipExplode(this.ship01);
         }
+        //update clock
+        this.timeText.text = (60 - this.clock.getElapsedSeconds()).toString().substr(0, 4);
     }
 
     checkCollision(rocket, ship) {

@@ -24,11 +24,16 @@ class Spaceship extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
+        //randomly decide which side it appears from
         this.movingLeft = Math.floor(Math.random() * 2);
         if (this.movingLeft) {
             this.x = game.config.width;
+            //make sure sprite is facing correct way
+            this.flipX = false;
         } else {
             this.x = 0
+            this.flipX = true;
         }
+        
     }
 }
