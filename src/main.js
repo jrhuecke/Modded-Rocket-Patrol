@@ -1,13 +1,18 @@
-/* Score Breakdown:
+/* Ryan Hueckel
+   Modded Rocket Patrol Project 4/17/2022
+
+   Score Breakdown:
    5 - Track highscore
    5 - Add music
    5 - Random spaceship movement
    5 - Allow player to move rocket after fired
    5 - Fire text from original game
+   5 - New background
    10 - Display time remaining
    10 - New title screen
    20 - Create new smaller/faster spaceship
    30 - Simultaneous two-player mode
+   TOTAL: 100
 */
 
 
