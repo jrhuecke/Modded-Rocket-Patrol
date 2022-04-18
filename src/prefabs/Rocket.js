@@ -10,6 +10,20 @@ class Rocket extends Phaser.GameObjects.Sprite {
         this.left = left;
         this.right = right;
         this.fire = fire;
+        //firing text
+        let textConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 0
+        }
+        this.fireText = scene.add.text(game.config.width * (2/3) - 35, borderUISize + borderPadding*2, '', textConfig);
     }
 
     update() {
@@ -28,6 +42,9 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
         if(this.isFiring && this.y >= borderUISize * 3 + borderPadding) {
             this.y -= this.moveSpeed;
+            this.fireText.text = 'FIRE';
+        } else {
+            this.fireText.text = '';
         }
         //reset on miss
         if(this.y <= borderUISize * 3 + borderPadding) {

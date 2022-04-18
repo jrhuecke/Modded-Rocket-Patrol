@@ -75,6 +75,7 @@ class Play extends Phaser.Scene {
         this.music = this.sound.add('sfx_music');
         this.music.loop = true;
         this.music.play();
+
     }
 
     update() {
